@@ -1,3 +1,4 @@
 syntax: glob
 
 *.pyc
+test_imap_gmail_login.py

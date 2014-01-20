@@ -4,6 +4,8 @@ from email.parser import HeaderParser
 
 import imap_gmail
 
+from test_imap_gmail_login import TEST_IMAP_GMAIL_USERNAME, TEST_IMAP_GMAIL_PASSWORD
+
 
 
 
@@ -12,10 +14,7 @@ class IMAP_GMAIL(unittest.TestCase):
     def setUp(self):
       self.gmail = imap_gmail.IMAP_GMAIL()
 
-      username = # user@gmail.com
-      password = # password
-
-      self.gmail.login(username, password)
+      self.gmail.login(TEST_IMAP_GMAIL_USERNAME, TEST_IMAP_GMAIL_PASSWORD)
 
 
     def tearDown(self):
