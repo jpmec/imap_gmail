@@ -6,21 +6,17 @@ import unittest
 
 import imap_gmail
 
-from test_imap_gmail_login import TEST_IMAP_GMAIL_USERNAME, TEST_IMAP_GMAIL_PASSWORD
-
-
+from imap_gmail_unittest_fixture import IMAP_GMAIL_TEST_FIXTURE
 
 
 class IMAP_GMAIL(unittest.TestCase):
 
     def setUp(self):
-        self.gmail = imap_gmail.IMAP_GMAIL()
-
-        self.gmail.login(TEST_IMAP_GMAIL_USERNAME, TEST_IMAP_GMAIL_PASSWORD)
+        self.fixture = IMAP_GMAIL_TEST_FIXTURE()
 
 
     def tearDown(self):
-        self.gmail.logout()
+        self.fixture.gmail.logout()
 
 
     #def test_mailbox_names(self):
@@ -79,15 +75,15 @@ class IMAP_GMAIL(unittest.TestCase):
         """
         Create a folder
         """
-        status, result = self.gmail.delete('my_new_mailbox')
+        status, result = self.fixture.gmail.delete('my_new_mailbox')
 
-        status, result = self.gmail.create('my_new_mailbox')
+        status, result = self.fixture.gmail.create('my_new_mailbox')
 
         self.assertEquals('OK', status)
         self.assertEquals('Success', result[0])
 
         self.assertEquals('OK', status)
-        status, result = self.gmail.delete('my_new_mailbox')
+        status, result = self.fixture.gmail.delete('my_new_mailbox')
 
         self.assertEquals('Success', result[0])
 
