@@ -12,11 +12,11 @@ from imap_gmail_unittest_fixture import IMAP_GMAIL_TEST_FIXTURE
 class IMAP_GMAIL(unittest.TestCase):
 
     def setUp(self):
-        self.fixture = IMAP_GMAIL_TEST_FIXTURE()
+        pass
 
 
     def tearDown(self):
-        self.fixture.gmail.logout()
+        pass
 
 
     #def test_mailbox_names(self):
@@ -75,17 +75,19 @@ class IMAP_GMAIL(unittest.TestCase):
         """
         Create a folder
         """
-        status, result = self.fixture.gmail.delete('my_new_mailbox')
 
-        status, result = self.fixture.gmail.create('my_new_mailbox')
+        with IMAP_GMAIL_TEST_FIXTURE('test_create_folder') as fixture:
+            status, result = fixture.gmail.delete('my_new_mailbox')
 
-        self.assertEquals('OK', status)
-        self.assertEquals('Success', result[0])
+            status, result = fixture.gmail.create('my_new_mailbox')
 
-        self.assertEquals('OK', status)
-        status, result = self.fixture.gmail.delete('my_new_mailbox')
+            self.assertEquals('OK', status)
+            self.assertEquals('Success', result[0])
 
-        self.assertEquals('Success', result[0])
+            self.assertEquals('OK', status)
+            status, result = fixture.gmail.delete('my_new_mailbox')
+
+            self.assertEquals('Success', result[0])
 
 
 
